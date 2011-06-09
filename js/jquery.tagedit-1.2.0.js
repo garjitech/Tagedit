@@ -172,13 +172,11 @@
 
 							var checkAutocomplete = oldValue == true? false : true;								
 							var parsedResult = options.parseValues($(this).val());										
-							alert(JSON.stringify(parsedResult));
 							if(parsedResult.length > 0) {
 								for(var i=0; i < parsedResult.length; i++) {															
 									// check if the Value ist new
 									var parsedValue = parsedResult[i];
 									var isNewResult = isNew(parsedValue.value, checkAutocomplete);
-									//var isNewResult = isNew($(this).val(), checkAutocomplete);
 									if(isNewResult[0] === true || (isNewResult[0] === false && typeof isNewResult[1] == 'string')) {
 
 										if(oldValue == false && typeof isNewResult[1] == 'string') {
@@ -189,11 +187,9 @@
 										if(options.allowAdd == true || oldValue) {
 											// Make a new tag in front the input
 											html = '<li class="tagedit-listelement tagedit-listelement-old">';
-											//html += '<span dir="'+options.direction+'">' + $(this).val() + '</span>';
 											html += '<span dir="'+options.direction+'">' + parsedValue.label + '</span>';
 											var name = oldValue? baseName + '['+id+options.addedPostfix+']' : baseName + '[]';
 											html += '<input type="hidden" name="'+name+'" value="'+parsedValue.value+'" />';
-											//html += '<input type="hidden" name="'+name+'" value="'+$(this).val()+'" />';
 											html += '<a class="tagedit-close" title="'+options.texts.removeLinkTitle+'">x</a>';
 											html += '</li>';
 
