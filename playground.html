@@ -66,12 +66,30 @@
 						{ "id": "1", "label": "Hazel Grouse", "value": "Hazel Grouse" },
 						{ "id": "2", "label": "Common Quail",	"value": "Common Quail" },
 						{ "id": "3", "label": "Greylag Goose", "value": "Greylag Goose" },
-						{ "id": "4", "label": "Merlin", "value": "Merlin" },
+						{ "id": "4", "label": "Merlin", "value": "Merlin" }
 					];				
 					return response($.ui.autocomplete.filter(data, request.term) );
 				}
 			}
 		});	
+
+		$('#custom-parser input.tag').tagedit({
+			autocompleteOptions: {
+				source: localJSON
+			},
+			parseValues: function(values) {
+				var parsedVals = [];
+				var splitVals = values.split(' ');
+				for(var i=0; i<splitVals.length; i++){
+					parsedVals.push({ 
+						id:'', 
+						label:splitVals[i], 
+						value:splitVals[i]
+					});
+				}
+				return parsedVals;
+			}
+		});				
 	});
 	</script>
     
@@ -125,6 +143,14 @@
 	
 	<h2>Use function source for autocomplete list</h2>
     <form action="server/formtarget.php" method="post" id="function-source">
+		<p>
+			<input type="text" name="tag[]" value="" class="tag"/>
+			<input type="submit" name="save" value="Save"/>
+		</p>
+    </form>
+	
+	<h2>Use custom value parsing function</h2>
+    <form action="server/formtarget.php" method="post" id="custom-parser">
 		<p>
 			<input type="text" name="tag[]" value="" class="tag"/>
 			<input type="submit" name="save" value="Save"/>
