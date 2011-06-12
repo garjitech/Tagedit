@@ -92,10 +92,15 @@
 			parseValues: function(values) {
 				var parsedVals = [];
 				var splitVals = goog.format.EmailAddress.parseList(values);
+				var label = '';
 				for(var i=0; i<splitVals.length; i++){
+					label = splitVals[i].getName();
+					if (label == '')
+						label = splitVals[i].getAddress();
+				
 					parsedVals.push({ 
 						id:'', 
-						label:splitVals[i].getName(), 
+						label:label, 
 						value:splitVals[i].toString()
 					});
 				}
