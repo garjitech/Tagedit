@@ -20,7 +20,14 @@
     <script type="text/javascript" src="js/jquery-ui-1.8.6.custom.min.js"></script>
     <script type="text/javascript" src="js/jquery.autoGrowInput.js"></script>
     <script type="text/javascript" src="js/jquery.tagedit-1.2.0.js"></script>
-    
+	
+	<script type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/base.js"></script>
+	<script type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/string/string.js"></script>
+	<script type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/useragent/useragent.js"></script>
+    <script type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/format/format.js"></script>
+	<script type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/format/emailaddress.js"></script>
+	
+	
     <script type="text/javascript">
 	$(function() {	
 		// Empty List
@@ -73,18 +80,23 @@
 			}
 		});	
 
+		// Custom Parser
 		$('#custom-parser input.tag').tagedit({
 			autocompleteOptions: {
-				source: localJSON
+				source: [
+					{ "id": "1", "label": "Hazel Grouse", "value": '"Hazel Grouse" <hgrouse@domain.com>' },
+					{ "id": "2", "label": "Common Quail",	"value": '"Common Quail" <cquail@domain.com>' },
+					{ "id": "3", "label": "Greylag Goose", "value": '"Greylag Goose" <ggoose@domain.com>' }
+				]
 			},
 			parseValues: function(values) {
 				var parsedVals = [];
-				var splitVals = values.split(' ');
+				var splitVals = goog.format.EmailAddress.parseList(values);
 				for(var i=0; i<splitVals.length; i++){
 					parsedVals.push({ 
 						id:'', 
-						label:splitVals[i], 
-						value:splitVals[i]
+						label:splitVals[i].getName(), 
+						value:splitVals[i].toString()
 					});
 				}
 				return parsedVals;
