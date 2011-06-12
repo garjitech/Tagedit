@@ -20,15 +20,12 @@
     <script type="text/javascript" src="js/jquery-ui-1.8.6.custom.min.js"></script>
     <script type="text/javascript" src="js/jquery.autoGrowInput.js"></script>
     <script type="text/javascript" src="js/jquery.tagedit-1.2.0.js"></script>
-	
 	<script type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/base.js"></script>
-	<script type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/string/string.js"></script>
-	<script type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/useragent/useragent.js"></script>
-    <script type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/format/format.js"></script>
-	<script type="text/javascript" src="http://closure-library.googlecode.com/svn/trunk/closure/goog/format/emailaddress.js"></script>
-	
 	
     <script type="text/javascript">
+	
+	goog.require('goog.format.EmailAddress');
+	
 	$(function() {	
 		// Empty List
 		$( '#empty-list input.tag' ).tagedit({
